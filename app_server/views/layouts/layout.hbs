@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+    <div id="background">
+        <div id="page">
+            {{> header}}  <!-- Includes the header partial -->
+
+            <div id="contents">
+                {{{body}}}  <!-- This is where page-specific content will go -->
+            </div>
+
+            {{> footer}}  <!-- Includes the footer partial -->
+        </div>
+    </div>
+</body>
+</html>
