@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serves static files
 app.use('/', indexRouter);
 app.use('/travel', travelRouter);
 
+
 // Error handling for 404
 app.use((req, res, next) => {
     res.status(404).render('error', { message: 'Page Not Found' });
