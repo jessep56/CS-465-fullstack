@@ -4,6 +4,9 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 
+// Import database connection
+require('./app_server/models/db');
+
 const indexRouter = require('./app_server/routes/index');
 const travelRouter = require('./app_server/routes/travel');
 
@@ -30,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serves static files
 // Define routes
 app.use('/', indexRouter);
 app.use('/travel', travelRouter);
-
 
 // Error handling for 404
 app.use((req, res, next) => {
