@@ -1,4 +1,3 @@
-
 <h1>Travel</h1>
 
 <div id="contents">
@@ -8,8 +7,9 @@
                 <ul id="sites">
                     {{#each trips}}
                     <li>
-                        <a href="/travel/{{code}}"><img src="/images/{{image}}" alt="{{name}}"></a>
-                        <h2><a href="/travel/{{code}}">{{name}}</a></h2>
+                        <!-- Updated HREF to use the API -->
+                        <a href="/api/trips/{{code}}"><img src="/images/{{image}}" alt="{{name}}"></a>
+                        <h2><a href="/api/trips/{{code}}">{{name}}</a></h2>
                         <p>{{description}}</p>
                         <p>{{details}}</p>
                     </li>

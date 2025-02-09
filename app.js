@@ -4,11 +4,14 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 
-// Import database connection
-require('./app_server/models/db');
+// Import database connection (UPDATED PATH)
+require('./app_api/models/db');
 
 const indexRouter = require('./app_server/routes/index');
 const travelRouter = require('./app_server/routes/travel');
+
+// Import API router (NEW)
+const apiRouter = require('./app_api/routes/index');
 
 const app = express();
 
@@ -33,6 +36,9 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serves static files
 // Define routes
 app.use('/', indexRouter);
 app.use('/travel', travelRouter);
+
+// Register API routes (NEW)
+app.use('/api', apiRouter);
 
 // Error handling for 404
 app.use((req, res, next) => {
