@@ -35,9 +35,73 @@ const tripsFindByCode = async (req, res) => {
     }
 };
 
+// Add a new trip
+const tripsAddTrip = async (req, res) => {
+    console.log("tripsAddTrip function was called");
 
+    try {
+        const newTrip = new Trip({
+            code: req.body.code,
+            name: req.body.name,
+            length: req.body.length,
+            start: req.body.start,
+            resort: req.body.resort,
+            perPerson: req.body.perPerson,
+            image: req.body.image,
+            description: req.body.description
+        });
+
+        const savedTrip = await newTrip.save();
+
+        if (!savedTrip) {
+            return res.status(400).json({ message: "Error saving new trip" });
+        }
+
+        console.log("New trip added:", savedTrip);
+        res.status(201).json(savedTrip);
+    } catch (err) {
+        console.error("Error adding trip:", err);
+        res.status(500).json({ message: "Error adding trip", error: err });
+    }
+};
+
+// Update an existing trip
+const tripsUpdateTrip = async (req, res) => {
+    console.log("tripsUpdateTrip function was called");
+    console.log(req.params);
+    console.log(req.body);
+
+    try {
+        const updatedTrip = await Trip.findOneAndUpdate(
+            { 'code': req.params.tripCode },  // Find trip by tripCode
+            {
+                code: req.body.code,
+                name: req.body.name,
+                length: req.body.length,
+                start: req.body.start,
+                resort: req.body.resort,
+                perPerson: req.body.perPerson,
+                image: req.body.image,
+                description: req.body.description
+            },
+            { new: true } // Return updated document
+        ).exec();
+
+        if (!updatedTrip) {
+            return res.status(400).json({ message: "Error updating trip" });
+        }
+
+        console.log("Trip updated:", updatedTrip);
+        res.status(201).json(updatedTrip);
+    } catch (err) {
+        console.error("Error updating trip:", err);
+        res.status(500).json({ message: "Error updating trip", error: err });
+    }
+};
 
 module.exports = {
     tripsList,
-    tripsFindByCode
+    tripsFindByCode,
+    tripsAddTrip,
+    tripsUpdateTrip
 };

@@ -33,6 +33,15 @@ app.use(express.urlencoded({ extended: false })); // Parses URL-encoded bodies
 app.use(cookieParser()); // Parses cookies
 app.use(express.static(path.join(__dirname, 'public'))); // Serves static files
 
+// Enable CORS
+app.use('/api', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+  });
+  
+
 // Define routes
 app.use('/', indexRouter);
 app.use('/travel', travelRouter);
