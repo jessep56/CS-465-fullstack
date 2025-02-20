@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TripCardComponent } from '../trip-card/trip-card.component';
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
-import { Router } from '@angular/router';  // Added for routing capability
+import { Router } from '@angular/router';  
+import { AuthenticationService } from '../services/authentication.service';  // Added for authentication check
 
 @Component({
   selector: 'app-trip-listing',
@@ -17,7 +18,11 @@ export class TripListingComponent implements OnInit {
   trips: Trip[] = [];
   message: string = '';
 
-  constructor(private tripDataService: TripDataService, private router: Router) {  // Updated constructor
+  constructor(
+    private tripDataService: TripDataService, 
+    private router: Router, 
+    private authenticationService: AuthenticationService  // Inject AuthenticationService
+  ) {  
     console.log('trip-listing constructor');
   }
 
@@ -38,8 +43,12 @@ export class TripListingComponent implements OnInit {
     });
   }
 
-  public addTrip(): void {   // Added method for new button
+  public addTrip(): void {   
     this.router.navigate(['add-trip']);
+  }
+
+  public isLoggedIn(): boolean {   // Added authentication check
+    return this.authenticationService.isLoggedIn();
   }
 
   ngOnInit(): void {
