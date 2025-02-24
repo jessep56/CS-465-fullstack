@@ -30,9 +30,12 @@ export class TripDataService {
   }
 
   updateTrip(tripCode: string, formData: Trip): Observable<Trip> {
-    return this.http.put<Trip>(`${this.apiBaseUrl}trips/${tripCode}`, formData);
+    const token = this.storage.getItem('travlr-token'); // Retrieve token from storage
+    const headers = { Authorization: `Bearer ${token}` };
+  
+    return this.http.put<Trip>(`${this.apiBaseUrl}trips/${tripCode}`, formData, { headers });
   }
-
+  
   // Authentication API calls
   public login(user: User): Promise<AuthResponse> {
     return this.makeAuthApiCall('login', user);
