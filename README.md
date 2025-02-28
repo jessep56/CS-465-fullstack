@@ -1,4 +1,4 @@
-#CS-465 Full Stack Development with MEAN
+##CS-465 Full Stack Development with MEAN
 
 ## Project Overview
 This project is a full stack web application designed to serve both customer and administrative users. The customer-facing side allows users to browse available trips, while the admin panel provides the functionality to manage trip listings. The application includes a secure authentication system for admins to log in and perform CRUD (Create, Read, Update, Delete) operations on trips. The frontend is built using Angular as a single-page application (SPA), while the backend is powered by Express.js with a MongoDB NoSQL database.
